@@ -1,0 +1,331 @@
+Question 1: Project Initialization & First Push
+
+ADMIN@DESKTOP-KBH5TBD MINGW64 ~/python/gitlab (main)
+$ mkdir python-project
+
+ADMIN@DESKTOP-KBH5TBD MINGW64 ~/python/gitlab (main)
+$ cd python-project/
+
+ADMIN@DESKTOP-KBH5TBD MINGW64 ~/python/gitlab/python-project (main)
+$ git init
+Initialized empty Git repository in C:/Users/ADMIN/python/gitlab/python-project/.git/
+
+ADMIN@DESKTOP-KBH5TBD MINGW64 ~/python/gitlab/python-project (master)
+$ echo 'print("Hello World")' > app.py
+
+ADMIN@DESKTOP-KBH5TBD MINGW64 ~/python/gitlab/python-project (master)
+$ git status
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        app.py
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+ADMIN@DESKTOP-KBH5TBD MINGW64 ~/python/gitlab/python-project (master)
+$ git add app.py 
+warning: in the working copy of 'app.py', LF will be replaced by CRLF the next time Git touches it
+
+ADMIN@DESKTOP-KBH5TBD MINGW64 ~/python/gitlab/python-project (master)
+$ git commit -m "adding app.py file"
+[master (root-commit) 31f9ade] adding app.py file
+ 1 file changed, 1 insertion(+)
+ create mode 100644 app.py
+ADMIN@DESKTOP-KBH5TBD MINGW64 ~/python/gitlab/python-project (master)
+$ cd ..
+ADMIN@DESKTOP-KBH5TBD MINGW64 ~/python/gitlab (main)
+$ git branch -M main
+ADMIN@DESKTOP-KBH5TBD MINGW64 ~/python/gitlab (main)
+$ git push -u origin main
+branch 'main' set up to track 'origin/main'.
+Everything up-to-date
+
+
+---------------------------------------------------------
+Question 2: Working with Changes & History
+
+
+ADMIN@DESKTOP-KBH5TBD MINGW64 ~/python/gitlab (main)
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   python-project/app.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+ADMIN@DESKTOP-KBH5TBD MINGW64 ~/python/gitlab (main)
+$ git diff
+warning: in the working copy of 'python-project/app.py', LF will be replaced by CRLF the next time Git touches it
+diff --git a/python-project/app.py b/python-project/app.py
+index ad35e5a..21f6464 100644
+--- a/python-project/app.py
++++ b/python-project/app.py
+@@ -1 +1,6 @@
+ print("Hello World")
++
++def greet(name):
++    print(f"Hello, {name}")
++
++greet("Herovired")
+\ No newline at end of file
+ADMIN@DESKTOP-KBH5TBD MINGW64 ~/python/gitlab (main)
+$ git add .
+warning: in the working copy of 'python-project/app.py', LF will be replaced by CRLF the next time Git touches it
+
+ADMIN@DESKTOP-KBH5TBD MINGW64 ~/python/gitlab (main)
+$ git commit -m "Added greet function to app.py"
+[main 4c7df1a] Added greet function to app.py
+ 1 file changed, 5 insertions(+)
+
+ADMIN@DESKTOP-KBH5TBD MINGW64 ~/python/gitlab (main)
+$ git log
+commit 4c7df1ac708062433fddd8b872f38f26e4a4de98 (HEAD -> main)
+Author: sadik247 <sadik.syed247@gmail.com>
+Date:   Sun May 10 23:31:28 2026 +0530
+
+    Added greet function to app.py
+
+commit fd6e91c14d2bc9321845c2a0781133786652fe74 (origin/main)
+Author: sadik247 <sadik.syed247@gmail.com>
+Date:   Sun May 10 23:13:10 2026 +0530
+
+    Initial commit
+
+ADMIN@DESKTOP-KBH5TBD MINGW64 ~/python/gitlab (main)
+$ git log --oneline
+4c7df1a (HEAD -> main) Added greet function to app.py
+fd6e91c (origin/main) Initial commit
+
+ADMIN@DESKTOP-KBH5TBD MINGW64 ~/python/gitlab (main)
+$ git push origin main
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (4/4), 371 bytes | 123.00 KiB/s, done.
+Total 4 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+To https://github.com/Sadik247/gitlab.git
+   fd6e91c..4c7df1a  main -> main
+
+
+----------------------------------------------------------------------
+Question 3: Branching & Feature Development
+
+
+ADMIN@DESKTOP-KBH5TBD MINGW64 ~/python/gitlab (main)
+$ git branch feature-update
+
+ADMIN@DESKTOP-KBH5TBD MINGW64 ~/python/gitlab (main)
+$ git checkout feature-update
+Switched to branch 'feature-update'
+
+
+ADMIN@DESKTOP-KBH5TBD MINGW64 ~/python/gitlab (feature-update)
+$ git add .
+warning: in the working copy of 'python-project/app.py', LF will be replaced by CRLF the next time Git touches it
+
+ADMIN@DESKTOP-KBH5TBD MINGW64 ~/python/gitlab (feature-update)
+$ git commit -m "Added feature in feature-update branch"
+[feature-update 6a92789] Added feature in feature-update branch
+ 1 file changed, 8 insertions(+), 1 deletion(-)
+
+ADMIN@DESKTOP-KBH5TBD MINGW64 ~/python/gitlab (feature-update)
+$ git checkout main
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+
+ADMIN@DESKTOP-KBH5TBD MINGW64 ~/python/gitlab (main)
+$ git merge feature-update
+Updating 4c7df1a..6a92789
+Fast-forward
+ python-project/app.py | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
+
+ADMIN@DESKTOP-KBH5TBD MINGW64 ~/python/gitlab (main)
+$ git log --oneline
+6a92789 (HEAD -> main, feature-update) Added feature in feature-update branch
+4c7df1a (origin/main) Added greet function to app.py
+fd6e91c Initial commit
+
+ADMIN@DESKTOP-KBH5TBD MINGW64 ~/python/gitlab (main)
+$ git branch -d feature-update
+Deleted branch feature-update (was 6a92789).
+
+ADMIN@DESKTOP-KBH5TBD MINGW64 ~/python/gitlab (main)
+$ git branch testbranch
+
+ADMIN@DESKTOP-KBH5TBD MINGW64 ~/python/gitlab (main)
+$ git checkout testbranch
+Switched to branch 'testbranch'
+
+ADMIN@DESKTOP-KBH5TBD MINGW64 ~/python/gitlab (testbranch)
+$ print("testbranch test")
+bash: syntax error near unexpected token `"testbranch test"'
+
+ADMIN@DESKTOP-KBH5TBD MINGW64 ~/python/gitlab (testbranch)
+$ git add .
+git commit -m "Dummy branch commit"
+[testbranch 64b9eaa] Dummy branch commit
+ 1 file changed, 1 insertion(+), 13 deletions(-)
+
+ADMIN@DESKTOP-KBH5TBD MINGW64 ~/python/gitlab (testbranch)
+$ git checkout main
+Switched to branch 'main'
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+
+ADMIN@DESKTOP-KBH5TBD MINGW64 ~/python/gitlab (main)
+$ git branch -D testbranch
+Deleted branch testbranch (was 64b9eaa).
+
+
+-------------------------------------------
+Question 4: Handling Errors (Stash, Reset, Revert)
+
+
+ADMIN@DESKTOP-KBH5TBD MINGW64 ~/python/gitlab (main)
+$ touch notes.txt
+
+ADMIN@DESKTOP-KBH5TBD MINGW64 ~/python/gitlab (main)
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   python-project/app.py
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        notes.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+ADMIN@DESKTOP-KBH5TBD MINGW64 ~/python/gitlab (main)
+$ git stash -u
+Saved working directory and index state WIP on main: 6a92789 Added feature in feature-update branch
+
+ADMIN@DESKTOP-KBH5TBD MINGW64 ~/python/gitlab (main)
+$ git stash list
+stash@{0}: WIP on main: 6a92789 Added feature in feature-update branch
+
+ADMIN@DESKTOP-KBH5TBD MINGW64 ~/python/gitlab (main)
+$ git stash apply
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   python-project/app.py
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        notes.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+ADMIN@DESKTOP-KBH5TBD MINGW64 ~/python/gitlab (main)
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   python-project/app.py
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        notes.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+ADMIN@DESKTOP-KBH5TBD MINGW64 ~/python/gitlab (main)
+$ git add .
+
+ADMIN@DESKTOP-KBH5TBD MINGW64 ~/python/gitlab (main)
+$ git commit -m "Added temporary work changes"
+[main 0d22e4a] Added temporary work changes
+ 2 files changed, 1 insertion(+), 13 deletions(-)
+ create mode 100644 notes.txt
+
+ADMIN@DESKTOP-KBH5TBD MINGW64 ~/python/gitlab (main)
+$ git add .
+git commit -m "Added incorrect buggy code"
+Enumerating objects: 30, done.
+Counting objects: 100% (30/30), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (13/13), done.
+Writing objects: 100% (30/30), done.
+Total 30 (delta 5), reused 0 (delta 0), pack-reused 0 (from 0)
+[main 17088c9] Added incorrect buggy code
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+ADMIN@DESKTOP-KBH5TBD MINGW64 ~/python/gitlab (main)
+$ git reset --soft HEAD~1
+
+ADMIN@DESKTOP-KBH5TBD MINGW64 ~/python/gitlab (main)
+$ git add .
+git commit -m "Fixed buggy code issue"
+[main 00543d5] Fixed buggy code issue
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+ADMIN@DESKTOP-KBH5TBD MINGW64 ~/python/gitlab (main)
+$ git log --oneline
+00543d5 (HEAD -> main) Fixed buggy code issue
+0d22e4a Added temporary work changes
+6a92789 (origin/main, origin/HEAD) Added feature in feature-update branch
+4c7df1a Added greet function to app.py
+fd6e91c Initial commit
+
+ADMIN@DESKTOP-KBH5TBD MINGW64 ~/python/gitlab (main)
+$ git revert 00543d5
+[main 1944b1a] Revert "Fixed buggy code issue"
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+ADMIN@DESKTOP-KBH5TBD MINGW64 ~/python/gitlab (main)
+$ git log
+commit 1944b1ab2095144219d24ce2432fd5c529cfc903 (HEAD -> main)
+commit 1944b1ab2095144219d24ce2432fd5c529cfc903 (HEAD -> main)
+Author: sadik247 <sadik.syed247@gmail.com>
+Date:   Mon May 11 00:03:56 2026 +0530
+
+    Revert "Fixed buggy code issue"
+    
+    This reverts commit 00543d54212900c1df056672a46ca3775ea92d64.
+
+commit 00543d54212900c1df056672a46ca3775ea92d64
+Author: sadik247 <sadik.syed247@gmail.com>
+Date:   Mon May 11 00:02:53 2026 +0530
+
+    Fixed buggy code issue
+
+commit 0d22e4ab13e4f23faae9c41e30395226f2755c61
+Author: sadik247 <sadik.syed247@gmail.com>
+Date:   Sun May 10 23:56:30 2026 +0530
+
+    Added temporary work changes
+
+commit 6a92789bbf36d2290cfd28c58374a39654aefeb3 (origin/main, origin/HEAD)
+Author: sadik247 <sadik.syed247@gmail.com>
+Date:   Sun May 10 23:39:10 2026 +0530
+
+    Added feature in feature-update branch
+
+commit 4c7df1ac708062433fddd8b872f38f26e4a4de98
+Author: sadik247 <sadik.syed247@gmail.com>
+Date:   Sun May 10 23:31:28 2026 +0530
+
+    Added greet function to app.py
+
+commit fd6e91c14d2bc9321845c2a0781133786652fe74
+Author: sadik247 <sadik.syed247@gmail.com>
+Date:   Sun May 10 23:13:10 2026 +0530
